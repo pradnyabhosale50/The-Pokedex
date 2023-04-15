@@ -1,0 +1,49 @@
+<!-- navbar start-->
+
+<mat-toolbar color="warn">
+  <img
+    class="images"
+    style="width: 150px; height: 50px"
+    src="https://pokemon-dict.web.app/assets/icons/pokemon-logo-small.webp"
+  />
+  <span style="font-size: 32px; font-weight: 500; margin-left: 50px"
+    >Pokédex</span
+  >
+  <span class="example-spacer"></span>
+</mat-toolbar>
+
+<!-- navbar end-->
+
+<!-- card view start-->
+
+<div class="row mt-5" *ngIf="pokemonsdata$ | async as pokemonsdata">
+  <div
+    class="col-md-3 mb-3 top-card"
+    (scroll)="onScrolling($event)"
+    *ngFor="let pokemon of pokemonsdata;"
+  >
+    <mat-card class="top-card" appMaterialElevation>
+      <div style="display: flex">
+        <div class="p-3">
+          <img [src]="pokemon.sprites.front_shiny" />
+        </div>
+        <div class="m-4 w-100">
+          <p class="card-head mb-0">
+            <b> # {{ pokemon.id }} : {{ pokemon.name }}</b>
+          </p>
+
+          <mat-chip-listbox aria-label="Fish selection" class="p-2">
+            <mat-chip-option
+              *ngFor="let type of pokemon.types"
+              [class]="[type.type.name, 'type']"
+              >{{ type.type.name }}</mat-chip-option
+            >
+          </mat-chip-listbox>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<!-- card view start-->
+
